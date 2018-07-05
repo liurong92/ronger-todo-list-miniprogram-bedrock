@@ -1,14 +1,11 @@
-const express = require('express')
+import express from 'express'
 const PORT = process.env.PORT || 3000
 const app = express()
+import {login} from './login/login'
 
-app.get('/', (req, res) =>
-    res.status(200).send({
-      message: 'Welcome tod the beginning of nothingness.',
-    })
-  )
+app.get('/api', login)
 
-app.get('/hello', (req, res) =>
+app.get('/api/hello', (req, res) =>
     res.status(200).send({
       id: '123',
     })
