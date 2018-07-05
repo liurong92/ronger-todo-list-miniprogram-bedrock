@@ -1,0 +1,17 @@
+{
+  "name": "ronger-todo-list-miniprogram-bedrock",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "express": "^4.15.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5",
+    "request": "^2.81.0",
+    "tape": "^4.7.0"
+  }
+}
