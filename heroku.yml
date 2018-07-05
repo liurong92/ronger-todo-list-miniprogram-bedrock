@@ -1,0 +1,5 @@
+build:
+  languages:
+    - node.js
+run:
+  web: node src/server.js

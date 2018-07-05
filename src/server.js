@@ -1,8 +1,8 @@
 const express = require('express')
 const PORT = process.env.PORT || 3000
+const app = express()
 
-express()
-  .get('/', (req, res) =>
+app.get('/', (req, res) =>
     res.status(200).send({
       message: 'Welcome tod the beginning of nothingness.',
     })
