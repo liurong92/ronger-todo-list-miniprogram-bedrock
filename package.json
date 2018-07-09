@@ -10,6 +10,7 @@
     "eslint:fix": "eslint .eslintrc.json src/** --fix"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "express": "^4.15.2"
   },
   "devDependencies": {

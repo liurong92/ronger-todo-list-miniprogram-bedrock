@@ -1,9 +1,11 @@
 import express from 'express'
 const PORT = process.env.PORT || 3000
 const app = express()
-import {login} from './login/login'
+import {todoList} from './todo-list/todoList'
+import {user} from './user/user'
 
-app.get('/api', login)
+app.use('/api/user', user)
+app.use('/api/todo-list', todoList)
 
 app.get('/api/hello', (req, res) =>
   res.status(200).send({
