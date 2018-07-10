@@ -25,4 +25,10 @@ todoList.get('/:openId', async (req, res) => {
   })
 })
 
+todoList.post('/:openId', (req, res) => {
+  console.log(req, '----------')
+  console.log(res, '--------------')
+  res.status(200).send('dddddd')
+})
+
 export {todoList}
