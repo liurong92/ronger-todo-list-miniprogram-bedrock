@@ -1,0 +1,16 @@
+{
+  "development": {
+    "username": "todo",
+    "password": "password",
+    "database": "todo-dev",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "todo",
+    "password": "password",
+    "database": "todo",
+    "host": "ronger-todo-list-miniprogram.herokuapp.com",
+    "dialect": "postgres"
+  }
+}

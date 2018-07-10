@@ -1,23 +1,28 @@
 import express from 'express'
+import models from '../../models'
 
 const todoList = express()
 
-todoList.get('/:userCode', async (req, res) => {
-  const userCode = req.params.userCode
-  if (userCode) {
+todoList.get('/:openId', async (req, res) => {
+  const openId = req.params.openId
+  if (!openId) {
     res.status(200).send({
-      todoList: [{
-        id: '1',
-        value: 'test test',
-        complete: true
-      }]
+      todoList: []
     })
   }
+  const items = await models.Items.findAll({
+    where: {
+      openId,
+    }
+  }).then((items) => {
+    return items.map((item) => {
+      return item.dataValues
+    })
+  })
 
   res.status(200).send({
-    todoList: []
+    todoList: items
   })
 })
-
 
 export {todoList}
