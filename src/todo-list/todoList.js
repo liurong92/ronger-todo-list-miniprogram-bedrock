@@ -3,7 +3,7 @@ import express from 'express'
 const todoList = express()
 
 todoList.get('/:userCode', async (req, res) => {
-  const userCode = req.params.userCode;
+  const userCode = req.params.userCode
   if (userCode) {
     res.status(200).send({
       todoList: [{

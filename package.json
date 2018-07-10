@@ -7,11 +7,16 @@
     "babel-node": "babel-node --presets=latest",
     "start": "nodemon --exec npm run babel-node -- src/server.js",
     "eslint": "eslint .eslintrc.json src/**",
-    "eslint:fix": "eslint .eslintrc.json src/** --fix"
+    "eslint:fix": "eslint .eslintrc.json src/** --fix",
+    "postinstall": "npm run eslint"
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "pg": "^7.4.3",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.38.0",
+    "sequelize-cli": "^4.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

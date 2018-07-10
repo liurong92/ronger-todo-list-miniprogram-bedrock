@@ -19,7 +19,7 @@ const getOpenIdByUserCode = async (userCode) => {
 
 
 user.get('/:userCode', async (req, res) => {
-  const userCode = req.params.userCode;
+  const userCode = req.params.userCode
   const openIdObject = await getOpenIdByUserCode(userCode)
   if (openIdObject && openIdObject.openid) {
     const openId = openIdObject.openid
