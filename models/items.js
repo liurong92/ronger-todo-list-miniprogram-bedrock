@@ -1,6 +1,7 @@
 'use strict'
 module.exports = (sequelize, DataTypes) => {
   var Items = sequelize.define('Items', {
+    index: DataTypes.STRING,
     value: DataTypes.STRING,
     complete: DataTypes.BOOLEAN,
     openId: DataTypes.STRING

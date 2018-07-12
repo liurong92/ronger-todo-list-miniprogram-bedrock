@@ -1,5 +1,7 @@
 import express from 'express'
-import models from '../../models'
+import compact from 'lodash/compact'
+import difference from 'lodash/difference'
+import {createItems, deleteItems, getTodoListByOpenId, updateItems} from './todoListUtils'
 
 const todoList = express()
 
@@ -10,25 +12,33 @@ todoList.get('/:openId', async (req, res) => {
       todoList: []
     })
   }
-  const items = await models.Items.findAll({
-    where: {
-      openId,
-    }
-  }).then((items) => {
-    return items.map((item) => {
-      return item.dataValues
-    })
-  })
+  const items = await getTodoListByOpenId(openId)
 
   res.status(200).send({
     todoList: items
   })
 })
 
-todoList.post('/:openId', (req, res) => {
-  console.log(req, '----------')
-  console.log(res, '--------------')
-  res.status(200).send('dddddd')
+todoList.post('/:openId', async (req, res) => {
+  const openId = req.params.openId
+  const currentlyTodoList = req.body.todoList
+  const needCreateTodoList = currentlyTodoList.filter(currentlyTodo => !currentlyTodo.id)
+
+  if (currentlyTodoList.length === 0) {
+    res.status(200).send('create success')
+  }
+  const previouslyTodoList = await getTodoListByOpenId(openId)
+
+  await createItems(needCreateTodoList, openId)
+
+  const previouslyTodoListIds = compact(previouslyTodoList.map((previouslyTodo) => previouslyTodo.id))
+  const currentlyTodoListIds = compact(currentlyTodoList.map((currentlyTodo) => currentlyTodo.id))
+  const deleteTodoListIds = difference(previouslyTodoListIds, currentlyTodoListIds)
+
+  await updateItems(currentlyTodoList)
+  await deleteItems(deleteTodoListIds)
+
+  res.status(200).send('update success')
 })
 
 export {todoList}
