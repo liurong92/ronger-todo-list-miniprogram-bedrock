@@ -1,6 +1,7 @@
 import express from 'express'
 import compact from 'lodash/compact'
 import difference from 'lodash/difference'
+import orderBy from 'lodash/orderBy'
 import {createItems, deleteItems, getTodoListByOpenId, updateItems} from './todoListUtils'
 
 const todoList = express()
@@ -15,7 +16,7 @@ todoList.get('/:openId', async (req, res) => {
   const items = await getTodoListByOpenId(openId)
 
   res.status(200).send({
-    todoList: items
+    todoList: orderBy(items, ['index', 'name'], ['asc'])
   })
 })
 
