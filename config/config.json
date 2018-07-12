@@ -7,10 +7,10 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "todo",
-    "password": "password",
-    "database": "todo",
-    "host": "ronger-todo-list-miniprogram.herokuapp.com",
+    "username": "fxtjbbvzyozegd",
+    "password": "88076058401c8df04668ed5357ba8c4bd789d9c6d4ccc01b8f262b0d4b95060b",
+    "database": "dadgm4rrtgjlcn",
+    "host": "ec2-107-22-169-45.compute-1.amazonaws.com",
     "dialect": "postgres"
   }
 }
