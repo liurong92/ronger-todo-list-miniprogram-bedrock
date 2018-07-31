@@ -1,14 +1,21 @@
 import express from 'express'
 import axios from 'axios'
+import models from '../../models'
 
 const user = express()
 
-const APP_ID = 'wx89d1eb0d3eff9cad'
-const SECRET_ID = 'e357ffc1af2cb313b0416b6f6f9e643a'
+const getSecretId = async () => {
+  return models.AppKey.findOne().then((res) => {
+    return res.dataValues
+  })
+}
 
 const getOpenIdByUserCode = async (userCode) => {
+  const appConfig = await getSecretId()
+  const {appId, secretId} = appConfig
+
   return axios
-    .get(`https://api.weixin.qq.com/sns/jscode2session?appid=${APP_ID}&secret=${SECRET_ID}&js_code=${userCode}&grant_type=authorization_code`)
+    .get(`https://api.weixin.qq.com/sns/jscode2session?appid=${appId}&secret=${secretId}&js_code=${userCode}&grant_type=authorization_code`)
     .then((res) => {
       return res.data
     })
@@ -17,9 +24,9 @@ const getOpenIdByUserCode = async (userCode) => {
     })
 }
 
-
 user.get('/:userCode', async (req, res) => {
   const userCode = req.params.userCode
+
   const openIdObject = await getOpenIdByUserCode(userCode)
   if (openIdObject && openIdObject.openid) {
     const openId = openIdObject.openid
